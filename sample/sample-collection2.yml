@@ -1,0 +1,4 @@
+packages:
+  - name: docker
+    version: 24.0.5
+    package_manager: scoop

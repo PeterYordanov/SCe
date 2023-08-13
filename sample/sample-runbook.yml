@@ -1,0 +1,7 @@
+includes:
+  - sample-collection1.yml
+  - sample-collection2.yml
+
+run:
+  - sample-collection1.yml
+  - sample.collection2.yml
