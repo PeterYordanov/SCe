@@ -3,6 +3,6 @@ packages:
     version: 2.51
     package_manager: choco
 
-  - name: rust
-    version: 1.71.1
-    package_manager: scoop
+  #- name: rust
+  #  version: 1.71.1
+  #  package_manager: scoop

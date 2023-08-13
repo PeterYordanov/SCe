@@ -4,4 +4,4 @@ includes:
 
 run:
   - sample-collection1.yml
-  - sample.collection2.yml
+  - sample-collection2.yml

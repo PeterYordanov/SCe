@@ -14,7 +14,6 @@ const (
 	AptGet
 	Snap
 	Scoop
-	Winget
 	Dpkg
 )
 
@@ -23,7 +22,6 @@ var packageManagerNames = [...]string{
 	"AptGet",
 	"Snap",
 	"Scoop",
-	"Winget",
 	"Dpkg",
 }
 
@@ -59,10 +57,6 @@ func (p PackageManagerInstaller) IsInstalled() bool {
 		cmd := exec.Command("scoop", "--version")
 		err := cmd.Run()
 		return err == nil
-	case Winget:
-		cmd := exec.Command("winget", "--version")
-		err := cmd.Run()
-		return err == nil
 	default:
 		return false
 	}
@@ -84,8 +78,6 @@ func (p PackageManagerInstaller) GetVersion() (string, error) {
 		cmd = exec.Command("snap", "--version")
 	case Scoop:
 		cmd = exec.Command("scoop", "--version")
-	case Winget:
-		cmd = exec.Command("winget", "--version")
 	default:
 		return "", fmt.Errorf("Unknown package manager")
 	}
@@ -132,8 +124,6 @@ func (p PackageManagerInstaller) Install() error {
 		if err != nil {
 			return err
 		}
-	case Winget:
-		return fmt.Errorf("invalid package manager type")
 	default:
 		return fmt.Errorf("invalid package manager type")
 	}
@@ -180,8 +170,6 @@ func (p PackageManagerInstaller) Uninstall() error {
 	case Snap:
 		return fmt.Errorf("invalid package manager type")
 	case Scoop:
-		return fmt.Errorf("invalid package manager type")
-	case Winget:
 		return fmt.Errorf("invalid package manager type")
 	default:
 		return fmt.Errorf("invalid package manager type")
