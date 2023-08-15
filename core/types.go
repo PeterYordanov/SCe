@@ -1,4 +1,4 @@
-package parser
+package core
 
 type Package struct {
 	Name           string `yaml:"name"`

@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"os"
+
 	"gopkg.in/yaml.v3"
 )
 
@@ -24,4 +26,20 @@ func (y *YamlWrapper[T]) ToString() (string, error) {
 // Parse unmarshals a YAML string into the internal data of the wrapper.
 func (y *YamlWrapper[T]) Parse(input string) error {
 	return yaml.Unmarshal([]byte(input), &y.data)
+}
+
+func (y *YamlWrapper[T]) ReadAndParse(filePath string) error {
+	data, err := os.ReadFile(filePath)
+
+	if err != nil {
+		return err
+	}
+
+	err = y.Parse(string(data))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
