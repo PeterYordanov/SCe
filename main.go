@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	runbook := parser.NewRunbook("C:\\Projects\\SCe-main\\sample\\sample-runbook.yml")
+	runbook := parser.NewRunbook("C:\\Projects\\SCe\\sample\\sample-runbook.yml")
 	fmt.Println(runbook.Parse())
 	fmt.Println(runbook.Run())
 }
