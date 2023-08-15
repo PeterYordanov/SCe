@@ -68,6 +68,8 @@ func (p Runbook) Run() error {
 			fmt.Println("PackageManager is choco")
 			pkgManager := packagemanagers.NewChocolatey()
 
+			fmt.Println(pkgManager.List())
+
 			isInstalled, err := core.IsPackageInstalled(pkgManager, value.Name, value.Version)
 
 			if err != nil {

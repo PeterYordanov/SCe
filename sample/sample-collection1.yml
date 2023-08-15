@@ -1,6 +1,6 @@
 packages:
   - name: keepass
-    version: 2.51
+    version: 2.51.0
     package_manager: choco
 
   #- name: rust

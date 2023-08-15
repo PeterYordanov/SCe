@@ -47,7 +47,7 @@ func (pm *ChocolateyPackageManager) Uninstall(packageName string) error {
 }
 
 func (pm *ChocolateyPackageManager) List() ([]core.Package, error) {
-	cmd := exec.Command("powershell", "-nologo", "-noprofile", `(choco list --local-only) | Select -SkipLast 1 | ForEach-Object { $_.Split(" ")[0] + "|" + $_.Split(" ")[1] }`)
+	cmd := exec.Command("powershell", "-nologo", "-noprofile", `(choco list) | Select -SkipLast 1 | ForEach-Object { $_.Split(" ")[0] + "|" + $_.Split(" ")[1] }`)
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {
