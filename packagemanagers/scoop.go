@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os/exec"
 	"strings"
+
+	"github.com/PeterYordanov/SCe/core"
 )
 
 type ScoopPackageManager struct{}
@@ -44,14 +46,31 @@ func (pm *ScoopPackageManager) Uninstall(packageName string) error {
 	return nil
 }
 
-func (pm *ScoopPackageManager) List() ([]string, error) {
-	cmd := exec.Command("scoop", "list")
+func (pm *ScoopPackageManager) List() ([]core.Package, error) {
+	cmd := exec.Command("powershell", "-command", "(scoop list) | ForEach-Object { $_.Name + '-' + $_.Version }")
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return nil, fmt.Errorf("Failed to list packages: %s", err)
 	}
 
-	packages := strings.Split(strings.TrimSpace(string(output)), "\r\n")
-	return packages, nil
+	strOutput := strings.TrimSpace(string(output))
+
+	packages := strings.Replace(strOutput, "Installed apps:", "", 1)
+	packagesList := strings.Split(packages, "\r\n")
+
+	result := make([]core.Package, 0)
+	for _, value := range packagesList {
+		tempSplit := strings.Split(value, "-")
+		packageName := tempSplit[0]
+		packageVersion := tempSplit[1]
+
+		result = append(result, core.Package{
+			PackageManager: "Chocolatey",
+			Name:           packageName,
+			Version:        packageVersion,
+		})
+	}
+
+	return result, nil
 }

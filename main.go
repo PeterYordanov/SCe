@@ -5,10 +5,18 @@ import (
 	"os"
 
 	"github.com/PeterYordanov/SCe/core"
-	"github.com/PeterYordanov/SCe/parser"
+	"github.com/PeterYordanov/SCe/packagemanagers"
 )
 
 func main() {
+
+	scoop := packagemanagers.NewScoop()
+	fmt.Println(scoop.List())
+
+	list, _ := scoop.List()
+	for _, value := range list {
+		fmt.Println(value)
+	}
 
 	isAdmin := core.IsRunningAsAdmin()
 
@@ -17,7 +25,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	runbook := parser.NewRunbook("C:\\Projects\\SCe\\sample\\sample-runbook.yml")
-	fmt.Println(runbook.Parse())
-	fmt.Println(runbook.Run())
+	//runbook := parser.NewRunbook("C:\\Projects\\SCe\\sample\\sample-runbook.yml")
+	//fmt.Println(runbook.Parse())
+	//fmt.Println(runbook.Run())
 }
